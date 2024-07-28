@@ -7,6 +7,16 @@ dotenv.config();
 
 const app = express();
 
+const db = new pg.Client({
+    user: process.env.DB_USER,
+    host: process.env.DB_HOST,
+    database: process.env.DB_DATABASE,
+    password: process.env.DB_PASSWORD,
+    port: process.env.DB_PORT,
+});
+
+db.connect();
+
 app.use(express.static("public"));
 app.use(express.urlencoded({extended: true}));
 
@@ -14,6 +24,6 @@ app.get("/", (req, res) => {
     res.render("index.ejs");
 });
 
-app.listen(process.env.PORT, () => {
-    console.log(`Server running on port ${process.env.PORT}`);
+app.listen(process.env.SERVER_PORT, () => {
+    console.log(`Server running on port ${process.env.SERVER_PORT}`);
 });
