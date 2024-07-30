@@ -24,6 +24,10 @@ app.get("/", (req, res) => {
     res.render("index.ejs");
 });
 
+app.get("/search", (req, res) => {
+    res.render("search.ejs");
+});
+
 app.get("/add", (req, res) => {
     res.render("book-form.ejs");
 });
