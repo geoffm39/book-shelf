@@ -1,3 +1,8 @@
+html, body {
+    height: 100%;
+    width: 100%;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -28,18 +33,40 @@ header {
     position: fixed;
     z-index: 10;
     width: 100%;
+    gap: 2rem;
+    padding-left: 1rem;
 }
 
 header * {
-    padding: 1rem;
     color: #FFFFFF;
+    text-decoration: none;
+    transition: transform 0.2s;
+    padding: 0.05rem;
+    border-radius: 0.3rem;
+}
+
+header *:hover {
+    transform: scale(1.05);
+}
+header *:active {
+    transform: scale(0.95);
+}
+
+header *:focus {
+    outline: none;
+    box-shadow: 0 0 3px 2px;
 }
 
 main {
     padding-top: 5rem;
     background-color: #F1F0E8;
+    flex-basis: 100%;
 }
 
 footer {
-    background-color: #F1F0E8; 
-}
+    background-color: #F1F0E8;
+    display: flex;
+    align-items: center;
+    height: 3rem;
+    padding-left: 1rem;
+}   
