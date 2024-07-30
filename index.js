@@ -17,14 +17,36 @@ const db = new pg.Client({
 
 db.connect();
 
+const API_URL = "https://openlibrary.org"
+
 app.use(express.static("public"));
 app.use(express.urlencoded({extended: true}));
 
-app.get("/", (req, res) => {
+app.get("/", async (req, res) => {
     res.render("index.ejs");
 });
 
-app.get("/search", (req, res) => {
+app.get("/search", async (req, res) => {
+    const searchQuery = req.query.search;
+    if (searchQuery) {
+        try {
+            const result = await axios.get(`${API_URL}/search.json`, {
+                params: {
+                    q: searchQuery,
+                    limit: 20
+                }
+            });
+            console.log(result.data.docs);
+            return res.render("search.ejs", {
+                results: result.data.docs
+            });
+        } catch (error) {
+            console.log(error.response.data);
+            return res.render("search.ejs", {
+                error: `${error.response.status} Error: Please try again later.`
+            });
+        }
+    }
     res.render("search.ejs");
 });
 
