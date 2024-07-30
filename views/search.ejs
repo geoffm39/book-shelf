@@ -1,7 +1,11 @@
 <%- include("partials/header.ejs") %>
-<h1>search</h1>
-<form action="">
-    
-</form>
+<div id="search">
+    <h1 class="playfair">Search for a book to add to your collection</h1>
+    <form id="search-form" action="/search", method="GET">
+        <input type="text" name="search" placeholder="Title, Author or ISBN">
+        <button type="submit">Search</button>
+    </form>    
+</div>
+
 
 <%- include("partials/footer.ejs") %>
