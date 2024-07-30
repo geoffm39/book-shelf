@@ -36,7 +36,6 @@ app.get("/search", async (req, res) => {
                     limit: 20
                 }
             });
-            console.log(result.data.docs);
             return res.render("search.ejs", {
                 results: result.data.docs
             });

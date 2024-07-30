@@ -1,11 +1,21 @@
 <%- include("partials/header.ejs") %>
 <div id="search">
     <h1 class="playfair">Search for a book to add to your collection</h1>
-    <form id="search-form" action="/search", method="GET">
+    <form id="search-form" action="/search" method="GET">
         <input type="text" name="search" placeholder="Title, Author or ISBN">
         <button type="submit">Search</button>
     </form>    
 </div>
-
+<div id="results">
+<% if (locals.results) { %>
+    <% results.forEach(result => { %>
+        <div class="result">
+            <img src="https://covers.openlibrary.org/b/OLID/<%= result.cover_edition_key %>-L.jpg" alt="book cover">
+            <h4><%= result.title %></h4>
+            <p><%= result.author_name[0] %></p>
+        </div>
+    <% }); %>
+<% } %>
+</div>
 
 <%- include("partials/footer.ejs") %>
