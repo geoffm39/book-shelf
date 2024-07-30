@@ -10,9 +10,13 @@
 <% if (locals.results) { %>
     <% results.forEach(result => { %>
         <div class="result">
-            <img src="https://covers.openlibrary.org/b/OLID/<%= result.cover_edition_key %>-M.jpg" alt="book cover">
-            <h4><%= result.title %></h4>
-            <p><%= result.author_name[0] %></p>
+            <div class="result-image">
+                <img src="https://covers.openlibrary.org/b/OLID/<%= result.cover_edition_key %>-M.jpg" alt="book cover">                
+            </div>
+            <div class="result-text">
+                <h4><%= result.title %></h4>
+                <p><%= result.author_name[0] %></p>                
+            </div>
         </div>
     <% }); %>
 <% } %>

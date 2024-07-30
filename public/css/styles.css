@@ -123,3 +123,14 @@ button:focus {
     outline: none;
     box-shadow: 0 0 3px 2px #333333;
 }
+
+#results {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.result {
+    border: #333333 solid 2px;
+    display: flex;
+}
