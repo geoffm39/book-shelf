@@ -11,7 +11,12 @@
     <% results.forEach(result => { %>
         <div class="result">
             <div class="result-image">
-                <img src="https://covers.openlibrary.org/b/OLID/<%= result.cover_edition_key %>-M.jpg" alt="book cover">                
+                <% if (result.cover_i) { %>
+                    <img src="https://covers.openlibrary.org/b/ID/<%= result.cover_i %>-M.jpg" alt="book cover">                   
+                <% } else { %>
+                    <img src="/images/book-cover-na.jpg" alt="book cover unavailable">
+                <% } %>
+             
             </div>
             <div class="result-text">
                 <h4><%= result.title %></h4>

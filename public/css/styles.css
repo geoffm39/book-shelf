@@ -128,9 +128,31 @@ button:focus {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    width: 50%;
+    gap: 2rem;
+    margin-top: 2rem;
 }
 
 .result {
-    border: #333333 solid 2px;
+    border: #333333 solid 1px;
+    border-radius: 0.3rem;
     display: flex;
+    width: 40%;
+    background-color: #FFFFFF;
+}
+
+.result-image {
+    width: 20%;
+    display: flex;
+    align-items: flex-start;
+    padding: 0.5rem;
+}
+
+.result-image img {
+    object-fit: contain;
+    width: 100%;
+}
+
+.result-text {
+    padding: 0.5rem;
 }
