@@ -9,7 +9,7 @@
 <div id="results">
 <% if (locals.results) { %>
     <% results.forEach(result => { %>
-        <div class="result">
+        <a class="result" href="">
             <div class="result-image">
                 <% if (result.cover_i) { %>
                     <img src="https://covers.openlibrary.org/b/ID/<%= result.cover_i %>-M.jpg" alt="book cover">                   
@@ -21,8 +21,8 @@
             <div class="result-text">
                 <p class="result-title"><%= result.title %></p>
                 <p class="result-author"><%= result.author_name[0] %></p>                
-            </div>
-        </div>
+            </div>            
+        </a>
     <% }); %>
 <% } %>
 </div>

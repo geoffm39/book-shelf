@@ -139,6 +139,7 @@ button:focus {
     display: flex;
     width: 40%;
     background-color: #FFFFFF;
+    text-decoration: none;
 }
 
 .result-image {
