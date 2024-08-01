@@ -33,6 +33,7 @@ app.get("/search", async (req, res) => {
             const result = await axios.get(`${API_URL}/search.json`, {
                 params: {
                     q: searchQuery,
+                    lang: "en",
                     limit: 20
                 }
             });
@@ -49,7 +50,8 @@ app.get("/search", async (req, res) => {
     res.render("search.ejs");
 });
 
-app.get("/add", (req, res) => {
+app.get("/add", async (req, res) => {
+    console.log(req.query.bookId)
     res.render("book-form.ejs");
 });
 
