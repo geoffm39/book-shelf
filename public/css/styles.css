@@ -156,3 +156,12 @@ button:focus {
 .result-text {
     padding: 0.5rem;
 }
+
+.result-title {
+    font-weight: 600;
+}
+
+.result-author {
+    color: #555555;
+    margin-top: 0.3rem;
+}
