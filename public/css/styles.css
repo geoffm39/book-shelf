@@ -140,6 +140,20 @@ button:focus {
     width: 40%;
     background-color: #FFFFFF;
     text-decoration: none;
+    transition: transform 0.3s;
+}
+
+.result:hover {
+    transform: scale(1.05);
+}
+
+.result:active {
+    transform: scale(0.95);
+}
+
+.result:focus {
+    outline: none;
+    box-shadow: 0 0 3px 2px #333333;
 }
 
 .result-image {
