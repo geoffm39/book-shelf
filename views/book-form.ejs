@@ -1,8 +1,32 @@
 <%- include("partials/header.ejs") %>
 
 <h1><%= locals.currentBook ? "Edit Book" : "Add Book" %></h1>
-<form action="<%= locals.currentBook ? `/edit/${currentBook.id}` : `/add`%>" method="POST">
-
+<form id="book-form" action="<%= locals.currentBook ? `/edit/${currentBook.id}` : `/add`%>" method="POST">
+    <div class="form-field">
+        <label for="title">Title</label>
+        <input type="text" name="title" id="title" placeholder="<%= locals.currentBook ? `${currentBook.title}` : `${newBook.title}`%>">
+    </div>
+    <div class="form-field">
+        <label for="author">Title</label>
+        <input type="text" name="author" id="author" placeholder="<%= locals.currentBook ? `${currentBook.author}` : ``%>">
+    </div>
+    <div class="form-field">
+        <label for="date">Title</label>
+        <input type="text" name="date" id="date" placeholder="<%= locals.currentBook ? `${currentBook.date_read}` : `${new Date().toISOString()}`%>">
+    </div>
+    <div class="form-field">
+        <label for="description">Title</label>
+        <input type="text" name="description" id="description" placeholder="<%= locals.currentBook ? `${currentBook.description}` : `${newBook.description}`%>">
+    </div>
+    <div class="form-field">
+        <label for="rating">Title</label>
+        <input type="text" name="rating" id="rating" placeholder="<%= locals.currentBook ? `${currentBook.rating}` : ``%>">
+    </div>
+    <div class="form-field">
+        <label for="notes">Title</label>
+        <input type="text" name="notes" id="notes" placeholder="<%= locals.currentBook ? `${currentBook.notes}` : ``%>">
+    </div>
+    <button type="submit"><%= locals.currentBook ? "Edit Book" : "Add Book"%></button>
 </form>
 
 <%- include("partials/footer.ejs") %>
