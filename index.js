@@ -51,8 +51,16 @@ app.get("/search", async (req, res) => {
 });
 
 app.get("/add", async (req, res) => {
-    console.log(req.query.bookId)
-    res.render("book-form.ejs");
+    const bookId = req.query.bookId;
+    try {
+        const result = await axios.get(`${API_URL}${bookId}.json`);
+        return res.render("book-form.ejs", { book: result.data });
+    } catch (error) {
+        console.log(error.response.data);
+        return res.render("book-form.ejs", {
+            error: `${error.response.status} Error: Please try again later.`
+        });
+    }
 });
 
 app.listen(process.env.SERVER_PORT, () => {
