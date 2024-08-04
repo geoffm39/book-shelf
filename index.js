@@ -63,6 +63,11 @@ app.get("/add", async (req, res) => {
     }
 });
 
+app.post("/add", async (req, res) => {
+    console.log(req.body);
+    res.redirect("/");
+});
+
 app.listen(process.env.SERVER_PORT, () => {
     console.log(`Server running on port ${process.env.SERVER_PORT}`);
 });

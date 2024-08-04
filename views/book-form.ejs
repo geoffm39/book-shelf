@@ -2,32 +2,32 @@
 
 <h1><%= locals.currentBook ? "Edit Book" : "Add Book" %></h1>
 <form id="book-form" action="<%= locals.currentBook ? `/edit/${currentBook.id}` : `/add`%>" method="POST">
-    <input type="hidden" name="bookOLID" value="<%= locals.currentBook ? `${currentBook.api_id}` : `${newBook.key}` %>">
-    <input type="hidden" name="coverId" value="<%= locals.currentBook ? `${currentBook.cover_id}` : `${newBook.covers[0]}` %>">
-    <input type="hidden" name="authorOLID" value="<%= locals.currentBook ? `${currentBook.author_id}` : `${newBook.authors[0].author.key}` %>">
+    <input type="hidden" name="bookOLID" value="<%= locals.currentBook ? currentBook.api_id : (newBook ? newBook.key : ``) %>">
+    <input type="hidden" name="coverId" value="<%= locals.currentBook ? currentBook.cover_id : (newBook && newBook.covers ? newBook.covers[0] : ``) %>">
+    <input type="hidden" name="authorOLID" value="<%= locals.currentBook ? currentBook.author_id : (newBook && newBook.authors ? newBook.authors[0].author.key : ``) %>">
     <div class="form-field">
         <label for="title">Title</label>
-        <input type="text" name="title" id="title" value="<%= locals.currentBook ? `${currentBook.title}` : `${newBook.title}`%>">
+        <input type="text" name="title" id="title" value="<%= locals.currentBook ? currentBook.title : newBook.title %>">
     </div>
     <div class="form-field">
-        <label for="author">Title</label>
-        <input type="text" name="author" id="author" value="<%= locals.currentBook ? `${currentBook.author}` : ``%>">
+        <label for="author">Author</label>
+        <input type="text" name="author" id="author" value="<%= locals.currentBook ? currentBook.author : `` %>">
     </div>
     <div class="form-field">
-        <label for="date">Title</label>
-        <input type="text" name="date" id="date" value="<%= locals.currentBook ? `${currentBook.date_read}` : `${new Date().toLocaleDateString('en-CA')}`%>">
+        <label for="date">Date</label>
+        <input type="text" name="date" id="date" value="<%= locals.currentBook ? currentBook.date_read : new Date().toLocaleDateString('en-CA') %>">
     </div>
     <div class="form-field">
-        <label for="description">Title</label>
-        <input type="text" name="description" id="description" value="<%= locals.currentBook ? `${currentBook.description}` : `${newBook.description}`%>">
+        <label for="description">Description</label>
+        <input type="text" name="description" id="description" value="<%= locals.currentBook ? currentBook.description : newBook.description %>">
     </div>
     <div class="form-field">
-        <label for="rating">Title</label>
-        <input type="text" name="rating" id="rating" value="<%= locals.currentBook ? `${currentBook.rating}` : ``%>">
+        <label for="rating">Rating</label>
+        <input type="text" name="rating" id="rating" value="<%= locals.currentBook ? currentBook.rating : `` %>">
     </div>
     <div class="form-field">
-        <label for="notes">Title</label>
-        <input type="text" name="notes" id="notes" value="<%= locals.currentBook ? `${currentBook.notes}` : ``%>">
+        <label for="notes">Notes</label>
+        <input type="text" name="notes" id="notes" value="<%= locals.currentBook ? currentBook.notes : `` %>">
     </div>
     <button type="submit"><%= locals.currentBook ? "Edit Book" : "Add Book"%></button>
 </form>
