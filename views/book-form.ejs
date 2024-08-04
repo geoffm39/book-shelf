@@ -1,6 +1,5 @@
 <%- include("partials/header.ejs") %>
-
-<h1><%= locals.currentBook ? "Edit Book" : "Add Book" %></h1>
+<h1 class="playfair"><%= locals.currentBook ? "Edit Book" : "Add Book" %></h1>
 <form id="book-form" action="<%= locals.currentBook ? `/edit/${currentBook.id}` : `/add`%>" method="POST">
     <input type="hidden" name="bookOLID" value="<%= locals.currentBook ? currentBook.api_id : (newBook ? newBook.key : ``) %>">
     <input type="hidden" name="coverId" value="<%= locals.currentBook ? currentBook.cover_id : (newBook && newBook.covers ? newBook.covers[0] : ``) %>">
