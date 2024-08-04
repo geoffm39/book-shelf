@@ -6,11 +6,11 @@
     <input type="hidden" name="authorOLID" value="<%= locals.currentBook ? currentBook.author_id : (newBook && newBook.authors ? newBook.authors[0].author.key : ``) %>">
     <div class="form-field">
         <label for="title">Title</label>
-        <input type="text" name="title" id="title" value="<%= locals.currentBook ? currentBook.title : newBook.title %>">
+        <input type="text" name="title" id="title" value="<%= locals.currentBook ? currentBook.title : newBook.title %>" readonly>
     </div>
     <div class="form-field">
         <label for="author">Author</label>
-        <input type="text" name="author" id="author" value="<%= locals.currentBook ? currentBook.author : author %>">
+        <input type="text" name="author" id="author" value="<%= locals.currentBook ? currentBook.author : author %>" readonly>
     </div>
     <div class="form-field">
         <label for="date">Date</label>
