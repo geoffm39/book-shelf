@@ -54,7 +54,7 @@ app.get("/add", async (req, res) => {
     const bookId = req.query.bookId;
     try {
         const result = await axios.get(`${API_URL}${bookId}.json`);
-        return res.render("book-form.ejs", { newBook: result.data });
+        return res.render("book-form.ejs", { newBook: result.data, author: req.query.author });
     } catch (error) {
         console.log(error.response.data);
         return res.render("book-form.ejs", {
