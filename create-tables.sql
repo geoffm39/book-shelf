@@ -2,6 +2,7 @@ CREATE TABLE author (
 	id SERIAL PRIMARY KEY,
 	api_id INTEGER UNIQUE NOT NULL,
 	name TEXT UNIQUE NOT NULL,
+	bio TEXT,
 	rating INTEGER CONSTRAINT valid_rating CHECK (rating > 0 AND rating <= 10)
 );
 
