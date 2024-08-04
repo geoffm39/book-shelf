@@ -18,7 +18,7 @@
     </div>
     <div class="form-field">
         <label for="description">Description</label>
-        <input type="text" name="description" id="description" value="<%= locals.currentBook ? currentBook.description : newBook.description %>">
+        <textarea name="description" id="description"><%= locals.currentBook ? currentBook.description : newBook.description %></textarea>
     </div>
     <div class="form-field">
         <label for="rating">Rating</label>
@@ -26,7 +26,7 @@
     </div>
     <div class="form-field">
         <label for="notes">Notes</label>
-        <input type="text" name="notes" id="notes" value="<%= locals.currentBook ? currentBook.notes : `` %>">
+        <textarea name="notes" id="notes"><%= locals.currentBook ? currentBook.notes : `` %></textarea>
     </div>
     <button type="submit"><%= locals.currentBook ? "Edit Book" : "Add Book"%></button>
 </form>

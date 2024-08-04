@@ -88,7 +88,7 @@ footer {
     gap: 1rem;
 }
 
-#search-form input, #book-form input {
+#search-form input, #book-form input, textarea {
     width: 100%;
     border-radius: 0.3rem;
     border: #333333 solid 0.07rem;
@@ -96,7 +96,7 @@ footer {
     font-size: 1.2rem;
 }
 
-#search-form input:focus, #book-form input:focus {
+#search-form input:focus, #book-form input:focus, textarea:focus {
     outline: none;
     box-shadow: 0 0 3px 2px #333333;
 }
@@ -200,4 +200,30 @@ button:focus {
 #book-form button {
     font-size: 1.2rem;
     padding: 1rem;
+}
+
+#description {
+    height: 20rem;
+    resize: none;
+    overflow-y: auto;
+}
+
+#notes {
+    height: 10rem;
+    resize: none;
+    overflow-y: auto;
+}
+
+#description::-webkit-scrollbar, #notes::-webkit-scrollbar {
+    width: 1rem;
+}
+
+#description::-webkit-scrollbar-thumb, #notes::-webkit-scrollbar-thumb {
+    background-color: #96B6C5;
+    border-radius: 0.3rem;
+    cursor: pointer;
+}
+
+#description::-webkit-scrollbar-track, #notes::-webkit-scrollbar-track {
+    border-radius: 0.3rem;
 }
