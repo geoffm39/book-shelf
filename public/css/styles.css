@@ -88,7 +88,7 @@ footer {
     gap: 1rem;
 }
 
-#search-form input, #book-form input, textarea {
+#search-form input, #book-form input, textarea, select {
     width: 100%;
     border-radius: 0.3rem;
     border: #333333 solid 0.07rem;
@@ -96,7 +96,7 @@ footer {
     font-size: 1.2rem;
 }
 
-#search-form input:focus, #book-form input:focus, textarea:focus {
+#search-form input:focus, #book-form input:focus, textarea:focus, select:focus {
     outline: none;
     box-shadow: 0 0 3px 2px #333333;
 }

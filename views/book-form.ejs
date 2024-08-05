@@ -22,7 +22,13 @@
     </div>
     <div class="form-field">
         <label for="rating">Rating</label>
-        <input type="text" name="rating" id="rating" value="<%= locals.currentBook ? currentBook.rating : `` %>">
+        <select name="rating" id="rating">
+            <option value="1" <%= locals.currentBook && locals.currentBook.rating == 1 ? `selected` : `` %>>1</option>
+            <option value="2" <%= locals.currentBook && locals.currentBook.rating == 2 ? `selected` : `` %>>2</option>
+            <option value="3" <%= locals.currentBook && locals.currentBook.rating == 3 ? `selected` : `` %>>3</option>
+            <option value="4" <%= locals.currentBook && locals.currentBook.rating == 4 ? `selected` : `` %>>4</option>
+            <option value="5" <%= locals.currentBook && locals.currentBook.rating == 5 ? `selected` : `` %>>5</option>
+        </select>
     </div>
     <div class="form-field">
         <label for="notes">Notes</label>
