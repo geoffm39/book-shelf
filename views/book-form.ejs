@@ -1,40 +1,47 @@
 <%- include("partials/header.ejs") %>
-<h1 class="playfair"><%= locals.currentBook ? "Edit Book" : "Add Book" %></h1>
-<form id="book-form" action="<%= locals.currentBook ? `/edit/${currentBook.id}` : `/add`%>" method="POST">
-    <input type="hidden" name="bookOLID" value="<%= locals.currentBook ? currentBook.api_id : (newBook ? newBook.key : ``) %>">
-    <input type="hidden" name="coverId" value="<%= locals.currentBook ? currentBook.cover_id : (newBook && newBook.covers ? newBook.covers[0] : ``) %>">
-    <input type="hidden" name="authorOLID" value="<%= locals.currentBook ? currentBook.author_id : (newBook && newBook.authors ? newBook.authors[0].author.key : ``) %>">
-    <div class="form-field">
-        <label for="title">Title</label>
-        <input type="text" name="title" id="title" value="<%= locals.currentBook ? currentBook.title : newBook.title %>" readonly>
-    </div>
-    <div class="form-field">
-        <label for="author">Author</label>
-        <input type="text" name="author" id="author" value="<%= locals.currentBook ? currentBook.author : author %>" readonly>
-    </div>
-    <div class="form-field">
-        <label for="date">Date</label>
-        <input type="text" name="date" id="date" value="<%= locals.currentBook ? currentBook.date_read : new Date().toLocaleDateString('en-CA') %>">
-    </div>
-    <div class="form-field">
-        <label for="description">Description</label>
-        <textarea name="description" id="description"><%= locals.currentBook ? currentBook.description : newBook.description %></textarea>
-    </div>
-    <div class="form-field">
-        <label for="rating">Rating</label>
-        <select name="rating" id="rating">
-            <option value="1" <%= locals.currentBook && locals.currentBook.rating == 1 ? `selected` : `` %>>1</option>
-            <option value="2" <%= locals.currentBook && locals.currentBook.rating == 2 ? `selected` : `` %>>2</option>
-            <option value="3" <%= locals.currentBook && locals.currentBook.rating == 3 ? `selected` : `` %>>3</option>
-            <option value="4" <%= locals.currentBook && locals.currentBook.rating == 4 ? `selected` : `` %>>4</option>
-            <option value="5" <%= locals.currentBook && locals.currentBook.rating == 5 ? `selected` : `` %>>5</option>
-        </select>
-    </div>
-    <div class="form-field">
-        <label for="notes">Notes</label>
-        <textarea name="notes" id="notes"><%= locals.currentBook ? currentBook.notes : `` %></textarea>
-    </div>
-    <button type="submit"><%= locals.currentBook ? "Edit Book" : "Add Book"%></button>
-</form>
+
+<% if (locals.currentBook || locals.newBook) { %>
+    <h1 class="playfair"><%= locals.currentBook ? "Edit Book" : "Add Book" %></h1>
+    <form id="book-form" action="<%= locals.currentBook ? `/edit/${currentBook.id}` : `/add`%>" method="POST">
+        <input type="hidden" name="bookOLID" value="<%= locals.currentBook ? currentBook.api_id : (newBook ? newBook.key : ``) %>">
+        <input type="hidden" name="coverId" value="<%= locals.currentBook ? currentBook.cover_id : (newBook && newBook.covers ? newBook.covers[0] : ``) %>">
+        <input type="hidden" name="authorOLID" value="<%= locals.currentBook ? currentBook.author_id : (newBook && newBook.authors ? newBook.authors[0].author.key : ``) %>">
+        <div class="form-field">
+            <label for="title">Title</label>
+            <input type="text" name="title" id="title" value="<%= locals.currentBook ? currentBook.title : newBook.title %>" readonly>
+        </div>
+        <div class="form-field">
+            <label for="author">Author</label>
+            <input type="text" name="author" id="author" value="<%= locals.currentBook ? currentBook.author : author %>" readonly>
+        </div>
+        <div class="form-field">
+            <label for="date">Date</label>
+            <input type="text" name="date" id="date" value="<%= locals.currentBook ? currentBook.date_read : new Date().toLocaleDateString('en-CA') %>">
+        </div>
+        <div class="form-field">
+            <label for="description">Description</label>
+            <textarea name="description" id="description"><%= locals.currentBook ? currentBook.description : newBook.description %></textarea>
+        </div>
+        <div class="form-field">
+            <label for="rating">Rating</label>
+            <select name="rating" id="rating">
+                <option value="1" <%= locals.currentBook && locals.currentBook.rating == 1 ? `selected` : `` %>>1</option>
+                <option value="2" <%= locals.currentBook && locals.currentBook.rating == 2 ? `selected` : `` %>>2</option>
+                <option value="3" <%= locals.currentBook && locals.currentBook.rating == 3 ? `selected` : `` %>>3</option>
+                <option value="4" <%= locals.currentBook && locals.currentBook.rating == 4 ? `selected` : `` %>>4</option>
+                <option value="5" <%= locals.currentBook && locals.currentBook.rating == 5 ? `selected` : `` %>>5</option>
+            </select>
+        </div>
+        <div class="form-field">
+            <label for="notes">Notes</label>
+            <textarea name="notes" id="notes"><%= locals.currentBook ? currentBook.notes : `` %></textarea>
+        </div>
+        <button type="submit"><%= locals.currentBook ? "Edit Book" : "Add Book"%></button>
+    </form>    
+<% } else { %>
+    <% if (locals.error) { %>
+        <h2 id="add-book-error"><%= error %></h2>
+    <% } %>
+<% } %>
 
 <%- include("partials/footer.ejs") %>

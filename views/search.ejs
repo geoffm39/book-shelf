@@ -1,4 +1,5 @@
 <%- include("partials/header.ejs") %>
+
 <div id="search">
     <h1 class="playfair">Search for a book to add to your collection</h1>
     <form id="search-form" action="/search" method="GET">
@@ -23,6 +24,10 @@
             </div>            
         </a>
     <% }); %>
+<% } else { %>
+    <% if (locals.error) { %>
+        <h2 id="searh-error"><%= error %></h2>
+    <% } %>
 <% } %>
 </div>
 

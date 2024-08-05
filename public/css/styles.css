@@ -133,6 +133,10 @@ button:focus {
     margin-top: 2rem;
 }
 
+#search-error, #add-book-error {
+    margin-top: 2rem;
+}
+
 .result {
     border: #333333 solid 1px;
     border-radius: 0.3rem;
