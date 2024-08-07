@@ -101,7 +101,8 @@ footer {
     box-shadow: 0 0 3px 2px #333333;
 }
 
-button {
+button, #back-button {
+    text-decoration: none;
     padding: 0.5rem;
     border-radius: 0.3rem;
     border: none;
@@ -109,17 +110,18 @@ button {
     color: #FFFFFF;
     cursor: pointer;
     transition: transform 0.3s;
+    display: inline-block;
 }
 
-button:hover {
+button:hover, #back-button:hover {
     transform: scale(1.05);
 }
 
-button:active {
+button:active, #back-button:active {
     transform: scale(0.95);
 }
 
-button:focus {
+button:focus, #back-button:focus {
     outline: none;
     box-shadow: 0 0 3px 2px #333333;
 }
@@ -201,7 +203,13 @@ button:focus {
     gap: 0.2rem;
 }
 
-#book-form button {
+.form-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+}
+
+#book-form button, #book-form #back-button {
     font-size: 1.2rem;
     padding: 1rem;
 }

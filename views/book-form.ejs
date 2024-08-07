@@ -36,7 +36,10 @@
             <label for="notes">Notes</label>
             <textarea name="notes" id="notes"><%= locals.currentBook ? currentBook.notes : `` %></textarea>
         </div>
-        <button type="submit"><%= locals.currentBook ? "Edit Book" : "Add Book"%></button>
+        <div class="form-buttons">
+            <a id="back-button" href="/search?search=<%= search %>">Back</a>
+            <button type="submit"><%= locals.currentBook ? "Edit Book" : "Add Book"%></button>
+        </div>
     </form>    
 <% } else { %>
     <% if (locals.error) { %>
