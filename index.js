@@ -22,6 +22,23 @@ const API_URL = "https://openlibrary.org"
 app.use(express.static("public"));
 app.use(express.urlencoded({extended: true}));
 
+function entryExists(error) {
+    return error.code === '23505';
+}
+
+async function createAuthor(authorOLID) {
+    if (!authorOLID) {
+        return null;
+    }
+    try {
+        const result = await axios.get(`${API_URL}/${authorOLID}.json`);
+        console.log(result.data);
+    } catch (error) {
+        console.log(error.response.data);
+        return null;
+    }
+}
+
 app.get("/", async (req, res) => {
     res.render("index.ejs");
 });
@@ -52,9 +69,9 @@ app.get("/search", async (req, res) => {
 });
 
 app.get("/add", async (req, res) => {
-    const bookId = req.query.bookId;
+    const bookOLID = req.query.bookId;
     try {
-        const result = await axios.get(`${API_URL}${bookId}.json`);
+        const result = await axios.get(`${API_URL}${bookOLID}.json`);
         return res.render("book-form.ejs", { 
             newBook: result.data, 
             author: req.query.author,
@@ -69,7 +86,9 @@ app.get("/add", async (req, res) => {
 });
 
 app.post("/add", async (req, res) => {
-    console.log(req.body);
+    const authorId = req.body.authorOLID;
+    const author = await createAuthor(authorId);
+    console.log(author);
     res.redirect("/");
 });
 
