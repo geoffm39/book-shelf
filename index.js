@@ -32,7 +32,20 @@ async function createAuthor(authorOLID) {
     }
     try {
         const result = await axios.get(`${API_URL}/${authorOLID}.json`);
-        console.log(result.data);
+        try {
+            const newAuthor = await db.query(
+                "INSERT INTO author (api_id, photo_id, name, bio) VALUES ($1, $2, $3, $4) RETURNING *",
+                [
+                    authorOLID,
+                    result.data.photos[0] || null,
+                    result.data.name,
+                    result.data.bio || null
+                ]);
+            return newAuthor.rows[0];
+        } catch (error) {
+            console.log(error);
+            return null;
+        }
     } catch (error) {
         console.log(error.response.data);
         return null;
