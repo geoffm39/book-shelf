@@ -43,6 +43,15 @@ async function createAuthor(authorOLID) {
                 ]);
             return newAuthor.rows[0];
         } catch (error) {
+            if (entryExists(error)) {
+                try {
+                    const existingAuthor = await db.query("SELECT * FROM author WHERE api_id=$1", [authorOLID]);
+                    return existingAuthor.rows[0];
+                } catch (error) {
+                    console.log(error);
+                    return null;
+                }
+            }
             console.log(error);
             return null;
         }
