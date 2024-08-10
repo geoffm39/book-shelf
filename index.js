@@ -76,13 +76,13 @@ app.get("/search", async (req, res) => {
                     limit: 20
                 }
             });
-            return res.render("search.ejs", {
+            res.render("search.ejs", {
                 results: result.data.docs,
                 search: searchQuery
             });
         } catch (error) {
             console.log(error.response.data);
-            return res.render("search.ejs", {
+            res.render("search.ejs", {
                 error: `${error.response.status} Error: Please try again later.`
             });
         }
@@ -94,14 +94,14 @@ app.get("/add", async (req, res) => {
     const bookOLID = req.query.bookId;
     try {
         const result = await axios.get(`${API_URL}${bookOLID}.json`);
-        return res.render("book-form.ejs", { 
+        res.render("book-form.ejs", { 
             newBook: result.data, 
             author: req.query.author,
             search: req.query.search
         });
     } catch (error) {
         console.log(error.response.data);
-        return res.render("book-form.ejs", {
+        res.render("book-form.ejs", {
             error: `${error.response.status} Error: Please try again later.`
         });
     }
@@ -110,8 +110,31 @@ app.get("/add", async (req, res) => {
 app.post("/add", async (req, res) => {
     const authorId = req.body.authorOLID;
     const author = await createAuthor(authorId);
-    console.log(author);
-    res.redirect("/");
+    try {
+        await db.query(`INSERT INTO book (api_id, cover_id, title, description, date_read, notes, rating, author_id) 
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
+        [
+            req.body.bookOLID,
+            req.body.coverId,
+            req.body.title,
+            req.body.description,
+            req.body.date,
+            req.body.notes,
+            req.body.rating,
+            author.id
+        ]);
+        res.redirect("/");
+    } catch (error) {
+        if (entryExists(error)) {
+            return res.render("book-form.ejs", {
+                error: `Book already in your collection.`
+            });
+        }
+        console.log(error);
+        res.render("book-form.ejs", {
+            error: `${error.response.status} Error: Please try again later.`
+        });
+    }
 });
 
 app.listen(process.env.SERVER_PORT, () => {
