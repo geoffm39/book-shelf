@@ -62,7 +62,16 @@ async function createAuthor(authorOLID) {
 }
 
 app.get("/", async (req, res) => {
-    res.render("index.ejs");
+    try {
+        const result = await db.query(`SELECT book.cover_id, book.title, book.description, book.date_read, book.rating, book.notes, author.name AS author
+            FROM book LEFT JOIN author ON book.author_id = author.id ORDER BY book.title`);
+        res.render("index.ejs", { books: result.rows })
+    } catch (error) {
+        console.log(error);
+        res.render("index.ejs", {
+            error: `${error.response.status} Error: Please try again later.`
+        });
+    }
 });
 
 app.get("/search", async (req, res) => {
