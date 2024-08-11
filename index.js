@@ -119,12 +119,16 @@ app.get("/add", async (req, res) => {
 app.post("/add", async (req, res) => {
     const authorId = req.body.authorOLID;
     const author = await createAuthor(authorId);
+    let coverId = req.body.coverId;
+    if (coverId.trim() === '') {
+        coverId = null;
+    }
     try {
         await db.query(`INSERT INTO book (api_id, cover_id, title, description, date_read, notes, rating, author_id) 
             VALUES ($1, $2, $3, $4, $5, $6, $7, $8)`,
         [
             req.body.bookOLID,
-            req.body.coverId,
+            coverId,
             req.body.title,
             req.body.description,
             req.body.date,

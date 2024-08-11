@@ -12,10 +12,10 @@
                         <% } %>
                     </div>
                     <div class="book-text">
-                        <h2><%= book.title %></h2>
-                        <h3><%= book.author %></h3>
-                        <h4><%= book.rating %></h4>
-                        <p><%= book.date_read %></p>
+                        <h2 class="book-title playfair"><%= book.title %></h2>
+                        <h3 class="book-author">By <%= book.author %></h3>
+                        <h4 class="book-rating"><%= book.rating %></h4>
+                        <p class="book-date"><%= book.date_read %></p>
                         <p><%= book.description %></p>
                         <p><%= book.notes %></p>                        
                     </div>
