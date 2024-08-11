@@ -1,23 +1,28 @@
 <%- include("partials/header.ejs") %>
 
-<% if (locals.books) { %>
-    <% books.forEach(book => { %>
-        <div class="book">
-            <div class="book-cover">
-                <% if (book.cover_id) { %>
-                    <img src="https://covers.openlibrary.org/b/ID/<%= book.cover_id %>-M.jpg" alt="book cover">
-                <% } else { %>
-                    <img src="/images/book-cover-na.jpg" alt="book cover unavailable">
-                <% } %>
-            </div>
-            <h2><%= book.title %></h2>
-            <h3><%= book.author %></h3>
-            <h4><%= book.rating %></h4>
-            <p><%= book.date_read %></p>
-            <p><%= book.description %></p>
-            <p><%= book.notes %></p>
-        </div>
-    <% }); %>
-<% } %>
+    <div id="books">
+        <% if (locals.books) { %>
+            <% books.forEach(book => { %>
+                <div class="book">
+                    <div class="book-cover">
+                        <% if (book.cover_id) { %>
+                            <img src="https://covers.openlibrary.org/b/ID/<%= book.cover_id %>-M.jpg" alt="book cover">
+                        <% } else { %>
+                            <img src="/images/book-cover-na.jpg" alt="book cover unavailable">
+                        <% } %>
+                    </div>
+                    <div class="book-text">
+                        <h2><%= book.title %></h2>
+                        <h3><%= book.author %></h3>
+                        <h4><%= book.rating %></h4>
+                        <p><%= book.date_read %></p>
+                        <p><%= book.description %></p>
+                        <p><%= book.notes %></p>                        
+                    </div>
+                </div>
+                <hr>
+            <% }); %>
+        <% } %>        
+    </div>
 
 <%- include("partials/footer.ejs") %>

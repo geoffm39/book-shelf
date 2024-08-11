@@ -37,9 +37,9 @@ async function createAuthor(authorOLID) {
                 "INSERT INTO author (api_id, photo_id, name, bio) VALUES ($1, $2, $3, $4) RETURNING *",
                 [
                     authorOLID,
-                    result.data.photos[0] || null,
+                    result.data.photos ? result.data.photos[0] : null,
                     result.data.name,
-                    result.data.bio || null
+                    result.data.bio ? result.data.bio : null
                 ]);
             return newAuthor.rows[0];
         } catch (error) {
@@ -69,7 +69,7 @@ app.get("/", async (req, res) => {
     } catch (error) {
         console.log(error);
         res.render("index.ejs", {
-            error: `${error.response.status} Error: Please try again later.`
+            error: `Error: Please try again later.`
         });
     }
 });
@@ -90,9 +90,9 @@ app.get("/search", async (req, res) => {
                 search: searchQuery
             });
         } catch (error) {
-            console.log(error.response.data);
+            console.log(error);
             res.render("search.ejs", {
-                error: `${error.response.status} Error: Please try again later.`
+                error: `Error: Please try again later.`
             });
         }
     }
@@ -109,9 +109,9 @@ app.get("/add", async (req, res) => {
             search: req.query.search
         });
     } catch (error) {
-        console.log(error.response.data);
+        console.log(error);
         res.render("book-form.ejs", {
-            error: `${error.response.status} Error: Please try again later.`
+            error: `Error: Please try again later.`
         });
     }
 });
@@ -130,7 +130,7 @@ app.post("/add", async (req, res) => {
             req.body.date,
             req.body.notes,
             req.body.rating,
-            author.id
+            author ? author.id : null
         ]);
         res.redirect("/");
     } catch (error) {
@@ -141,7 +141,7 @@ app.post("/add", async (req, res) => {
         }
         console.log(error);
         res.render("book-form.ejs", {
-            error: `${error.response.status} Error: Please try again later.`
+            error: `Error: Please try again later.`
         });
     }
 });

@@ -239,3 +239,22 @@ button:focus, #back-button:focus {
 #description::-webkit-scrollbar-track, #notes::-webkit-scrollbar-track {
     border-radius: 0.3rem;
 }
+
+#books {
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.book {
+    display: flex;
+    gap: 1rem;
+}
+
+.book-cover {
+    width: 20%;
+    display: flex;
+    align-items: flex-start;
+}
