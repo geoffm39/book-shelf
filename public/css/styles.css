@@ -265,6 +265,10 @@ button:focus, #back-button:focus {
     object-fit: contain;
 }
 
+.book-text p {
+    line-height: 1.75rem;
+}
+
 .book-title {
     font-size: 2rem;
     font-weight: 600;
