@@ -63,7 +63,7 @@ async function createAuthor(authorOLID) {
 
 app.get("/", async (req, res) => {
     try {
-        const result = await db.query(`SELECT book.cover_id, book.title, book.description, book.date_read, book.rating, book.notes, author.name AS author
+        const result = await db.query(`SELECT book.id, book.cover_id, book.title, book.description, book.date_read, book.rating, book.notes, author.name AS author, author.id AS authorId
             FROM book LEFT JOIN author ON book.author_id = author.id ORDER BY book.title`);
         res.render("index.ejs", { books: result.rows })
     } catch (error) {
@@ -149,6 +149,14 @@ app.post("/add", async (req, res) => {
         });
     }
 });
+
+app.get("/edit/:bookId", async (req, res) => {
+    console.log(req.params.bookId);
+});
+
+app.delete("/delete/:bookId", async (req, res) => {
+    console.log(req.params.bookId);
+})
 
 app.listen(process.env.SERVER_PORT, () => {
     console.log(`Server running on port ${process.env.SERVER_PORT}`);

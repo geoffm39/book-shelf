@@ -12,7 +12,13 @@
                         <% } %>
                     </div>
                     <div class="book-text">
-                        <h2 class="book-title playfair"><%= book.title %></h2>
+                        <div class="title-buttons">
+                            <h2 class="book-title playfair"><%= book.title %></h2>  
+                            <div class="edit-buttons">
+                                <button class="edit-button" book-index="<%= book.id %>">Edit</button>
+                                <button class="delete-button" book-index="<%= book.id %>">Delete</button>
+                            </div>                          
+                        </div>
                         <h3 class="book-author">By <%= book.author %></h3>
                         <h4 class="book-rating">Rating: <%= book.rating %>/5</h4>
                         <p class="book-date">Date Read: <%= book.date_read.toLocaleDateString('en-CA') %></p>
