@@ -163,6 +163,11 @@ app.get("/edit/:bookId", async (req, res) => {
     }
 });
 
+app.post("/edit/:bookId", async (req, res) => {
+    console.log(req.body);
+    res.redirect("/");
+});
+
 app.delete("/delete/:bookId", async (req, res) => {
     console.log(req.params.bookId);
 })
