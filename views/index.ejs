@@ -14,13 +14,15 @@
                     <div class="book-text">
                         <h2 class="book-title playfair"><%= book.title %></h2>
                         <h3 class="book-author">By <%= book.author %></h3>
-                        <h4 class="book-rating"><%= book.rating %></h4>
-                        <p class="book-date"><%= book.date_read %></p>
+                        <h4 class="book-rating">Rating: <%= book.rating %>/5</h4>
+                        <p class="book-date">Date Read: <%= book.date_read.toLocaleDateString('en-CA') %></p>
                         <p><%= book.description %></p>
-                        <p><%= book.notes %></p>                        
+                        <% if (book.notes) { %>
+                            <p>Notes:<br><%= book.notes %></p>
+                        <% } %>                      
                     </div>
                 </div>
-                <hr>
+                <hr class="book-divider">
             <% }); %>
         <% } %>        
     </div>

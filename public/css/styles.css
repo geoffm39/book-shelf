@@ -265,11 +265,30 @@ button:focus, #back-button:focus {
     object-fit: contain;
 }
 
+.book-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
 .book-text p {
     line-height: 1.75rem;
 }
 
 .book-title {
     font-size: 2rem;
+    font-weight: 700;
+}
+
+.book-author {
     font-weight: 600;
+}
+
+.book-date {
+    color: #555555;
+}
+
+.book-divider {
+    background-color: #96B6C5;
+    height: 0.15rem;
 }
