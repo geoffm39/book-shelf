@@ -63,9 +63,9 @@ async function createAuthor(authorOLID) {
 
 app.get("/", async (req, res) => {
     try {
-        const result = await db.query(`SELECT book.id, book.cover_id, book.title, book.description, book.date_read, book.rating, book.notes, author.name AS author, author.id AS authorId
+        const books = await db.query(`SELECT book.id, book.cover_id, book.title, book.description, book.date_read, book.rating, book.notes, author.name AS author, author.id AS author_Id
             FROM book LEFT JOIN author ON book.author_id = author.id ORDER BY book.title`);
-        res.render("index.ejs", { books: result.rows })
+        res.render("index.ejs", { books: books.rows })
     } catch (error) {
         console.log(error);
         res.render("index.ejs", {
@@ -151,7 +151,16 @@ app.post("/add", async (req, res) => {
 });
 
 app.get("/edit/:bookId", async (req, res) => {
-    console.log(req.params.bookId);
+    try {
+        const book = await db.query(`SELECT book.id, book.cover_id, book.title, book.description, book.date_read, book.rating, book.notes, author.name AS author, author.id AS author_Id
+            FROM book LEFT JOIN author ON book.author_id = author.id WHERE book.id = $1`, [req.params.bookId]);
+        res.render("book-form.ejs", { currentBook: book.rows[0] });
+    } catch (error) {
+        console.log(error);
+        res.render("book-form.ejs", {
+            error: `Error: Please try again later.`
+        });
+    }
 });
 
 app.delete("/delete/:bookId", async (req, res) => {

@@ -16,7 +16,7 @@
         </div>
         <div class="form-field">
             <label for="date">Date</label>
-            <input type="text" name="date" id="date" value="<%= locals.currentBook ? currentBook.date_read : new Date().toLocaleDateString('en-CA') %>">
+            <input type="text" name="date" id="date" value="<%= locals.currentBook ? currentBook.date_read.toLocaleDateString(`en-CA`) : new Date().toLocaleDateString('en-CA') %>">
         </div>
         <div class="form-field">
             <label for="description">Description</label>
@@ -37,7 +37,7 @@
             <textarea name="notes" id="notes"><%= locals.currentBook ? currentBook.notes : `` %></textarea>
         </div>
         <div class="form-buttons">
-            <a id="back-button" href="/search?search=<%= search %>">Back</a>
+            <a id="back-button" href="<%= locals.currentBook ? `/` : `/search?search=${search}` %>">Back</a>
             <button type="submit"><%= locals.currentBook ? "Edit Book" : "Add Book"%></button>
         </div>
     </form>    
