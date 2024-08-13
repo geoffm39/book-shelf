@@ -66,7 +66,6 @@ app.get("/", async (req, res) => {
     if (!req.query.sort) {
         sortBy = `book.title`;
     }
-    console.log(sortBy);
     try {
         const books = await db.query(`SELECT book.id, book.cover_id, book.title, book.description, book.date_read, book.rating, book.notes, author.name AS author, author.id AS author_id
             FROM book LEFT JOIN author ON book.author_id = author.id ORDER BY ${sortBy}`);
