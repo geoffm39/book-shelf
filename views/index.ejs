@@ -8,6 +8,7 @@
                     <option value="book.title" <%= sortBy == `book.title` ? `selected` : `` %>>Title</option>
                     <option value="book.rating DESC" <%= sortBy == `book.rating DESC` ? `selected` : `` %>>Rating</option>
                     <option value="author" <%= sortBy == `author` ? `selected` : `` %>>Author</option>
+                    <option value="book.date_read DESC" <%= sortBy == `book.date_read DESC` ? `selected` : `` %>>Date</option>
                 </select>
             </form>
             <% books.forEach(book => { %>
