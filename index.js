@@ -77,12 +77,23 @@ app.get("/", async (req, res) => {
 app.get("/author/:authorId", async (req, res) => {
     try {
         const author = await db.query(`SELECT * FROM author WHERE id=$1`, [req.params.authorId]);
-        res.render("author.ejs", { author: author.rows[0] });
+        const authorBooks = await db.query(`SELECT book.title FROM book WHERE book.author_id=$1`, [req.params.authorId]);
+        res.render("author.ejs", { author: author.rows[0], authorBooks: authorBooks.rows });
     } catch (error) {
         console.log(error);
         res.render("index.ejs", {
             error: `Error: Please try again later.`
         });
+    }
+});
+
+app.post("/author/rating/:authorId", async (req, res) => {
+    try {
+        await db.query("UPDATE author SET rating = $1 WHERE id = $2", [req.body.rating, req.params.authorId]);
+        res.redirect(`/author/${req.params.authorId}`);
+    } catch (error) {
+        console.log(error);
+        res.redirect(`/author/${req.params.authorId}`);
     }
 });
 

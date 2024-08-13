@@ -1,7 +1,41 @@
 <%- include("partials/header.ejs") %>
 
 <div id="author">
-    <h1><%= author.name %></h1>
+    <div id="author-image">
+        <% if (author.photo_id) { %>
+            <img src="https://covers.openlibrary.org/a/ID/<%= author.photo_id %>-M.jpg" alt="author">    
+        <% } else { %>
+            <img src="/images/author-image-na.png" alt="author image unavailable">
+        <% } %>
+        <form id="author-rating" action="/author/rating/<%= author.id %>" method="POST">
+            <div id="author-rating-field">
+                <label for="rating">Rating:</label>
+                <select name="rating" id="author-rating" onchange="this.form.submit()">
+                    <option value="" <%= !author.rating ? `selected` : `` %>></option>
+                    <option value="1" <%= author.rating == 1 ? `selected` : `` %>>1</option>
+                    <option value="2" <%= author.rating == 2 ? `selected` : `` %>>2</option>
+                    <option value="3" <%= author.rating == 3 ? `selected` : `` %>>3</option>
+                    <option value="4" <%= author.rating == 4 ? `selected` : `` %>>4</option>
+                    <option value="5" <%= author.rating == 5 ? `selected` : `` %>>5</option>
+                </select>
+            </div>
+        </form>
+    </div>
+    <div id="author-text">
+        <h1 id="author-name" class="playfair"><%= author.name %></h1>
+        <p><%= author.bio %></p>
+        <% if (authorBooks) { %>
+            <div id="author-books">
+                <p id="author-book-heading">Books:</p>
+                <ul>
+                    <% authorBooks.forEach(book => { %>
+                        <li><%= book.title %></li>
+                    <% }); %>
+                </ul>                 
+            </div>
+ 
+        <% } %>
+    </div>
 </div>
 
 <%- include("partials/footer.ejs") %>
