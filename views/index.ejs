@@ -19,7 +19,9 @@
                                 <button class="delete-button" book-index="<%= book.id %>">Delete</button>
                             </div>                          
                         </div>
-                        <h3 class="book-author">By <%= book.author %></h3>
+                        <% if (book.author) { %>
+                            <a class="book-author" href="/author/<%= book.author_id %>">By <%= book.author %></a>                       
+                        <% } %>
                         <h4 class="book-rating">Rating: <%= book.rating %>/5</h4>
                         <p class="book-date">Date Read: <%= book.date_read.toLocaleDateString('en-CA') %></p>
                         <p><%= book.description %></p>
@@ -30,6 +32,10 @@
                 </div>
                 <hr class="book-divider">
             <% }); %>
+        <% } else { %>
+            <% if (locals.error) { %>
+                <h2 class="error"><%= error %></h2>    
+            <% } %>
         <% } %>        
     </div>
 

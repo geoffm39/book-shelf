@@ -135,7 +135,7 @@ button:focus, #back-button:focus {
     margin-top: 2rem;
 }
 
-#search-error, #add-book-error {
+#search-error, #add-book-error .error {
     margin-top: 2rem;
 }
 
@@ -283,6 +283,8 @@ button:focus, #back-button:focus {
 
 .book-author {
     font-weight: 600;
+    font-size: 1.2rem;
+    text-decoration: none;
 }
 
 .book-date {

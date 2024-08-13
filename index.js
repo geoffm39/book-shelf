@@ -63,9 +63,21 @@ async function createAuthor(authorOLID) {
 
 app.get("/", async (req, res) => {
     try {
-        const books = await db.query(`SELECT book.id, book.cover_id, book.title, book.description, book.date_read, book.rating, book.notes, author.name AS author, author.id AS author_Id
+        const books = await db.query(`SELECT book.id, book.cover_id, book.title, book.description, book.date_read, book.rating, book.notes, author.name AS author, author.id AS author_id
             FROM book LEFT JOIN author ON book.author_id = author.id ORDER BY book.title`);
-        res.render("index.ejs", { books: books.rows })
+        res.render("index.ejs", { books: books.rows });
+    } catch (error) {
+        console.log(error);
+        res.render("index.ejs", {
+            error: `Error: Please try again later.`
+        });
+    }
+});
+
+app.get("/author/:authorId", async (req, res) => {
+    try {
+        const author = await db.query(`SELECT * FROM author WHERE id=$1`, [req.params.authorId]);
+        res.render("author.ejs", { author: author.rows[0] });
     } catch (error) {
         console.log(error);
         res.render("index.ejs", {
@@ -164,12 +176,35 @@ app.get("/edit/:bookId", async (req, res) => {
 });
 
 app.post("/edit/:bookId", async (req, res) => {
-    console.log(req.body);
-    res.redirect("/");
+    try {
+        await db.query(`UPDATE book
+            SET date_read = $1, description = $2, rating = $3, notes = $4
+            WHERE id = $5`, [
+                req.body.date,
+                req.body.description,
+                req.body.rating,
+                req.body.notes,
+                req.params.bookId
+            ]);
+        res.redirect("/");
+    } catch (error) {
+        console.log(error);
+        res.render("book-form.ejs", {
+            error: `Error: Error updating book in database.`
+        });
+    }
 });
 
 app.delete("/delete/:bookId", async (req, res) => {
-    console.log(req.params.bookId);
+    try {
+        await db.query("DELETE FROM book WHERE id = $1", [req.params.bookId]);
+        res.redirect("/");
+    } catch (error) {
+        console.log(error);
+        res.render("index.ejs", {
+            error: `Error: Error deleting book from database.`
+        });
+    }
 })
 
 app.listen(process.env.SERVER_PORT, () => {
