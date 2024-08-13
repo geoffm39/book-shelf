@@ -62,10 +62,15 @@ async function createAuthor(authorOLID) {
 }
 
 app.get("/", async (req, res) => {
+    let sortBy = req.query.sort;
+    if (!req.query.sort) {
+        sortBy = `book.title`;
+    }
+    console.log(sortBy);
     try {
         const books = await db.query(`SELECT book.id, book.cover_id, book.title, book.description, book.date_read, book.rating, book.notes, author.name AS author, author.id AS author_id
-            FROM book LEFT JOIN author ON book.author_id = author.id ORDER BY book.title`);
-        res.render("index.ejs", { books: books.rows });
+            FROM book LEFT JOIN author ON book.author_id = author.id ORDER BY ${sortBy}`);
+        res.render("index.ejs", { books: books.rows, sortBy: sortBy });
     } catch (error) {
         console.log(error);
         res.render("index.ejs", {

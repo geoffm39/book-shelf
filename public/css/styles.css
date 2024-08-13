@@ -371,3 +371,18 @@ button:focus, #back-button:focus {
     position: relative;
     left: 1rem;
 }
+
+#sort-form {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#sort-form label {
+    font-size: 1.2rem;
+}
+
+#sort-form select {
+    width: 7rem;
+}

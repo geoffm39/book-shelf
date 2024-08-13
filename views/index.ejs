@@ -2,6 +2,14 @@
 
     <div id="books">
         <% if (locals.books) { %>
+            <form id="sort-form" action="/" method="GET">
+                <label for="sort">Sort By:</label>
+                <select name="sort" id="sort" onchange="this.form.submit()">
+                    <option value="book.title" <%= sortBy == `book.title` ? `selected` : `` %>>Title</option>
+                    <option value="book.rating DESC" <%= sortBy == `book.rating DESC` ? `selected` : `` %>>Rating</option>
+                    <option value="author" <%= sortBy == `author` ? `selected` : `` %>>Author</option>
+                </select>
+            </form>
             <% books.forEach(book => { %>
                 <div class="book">
                     <div class="book-cover">
